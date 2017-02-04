@@ -101,24 +101,6 @@ class InterviewRepository extends EntityRepository
         return $qb->getScalarResult();
     }
 
-    //hackaton
-    /*
-        select i.job_id, ia.answer_id
-        from interviews_answers ia
-        inner join interview i
-        on i.id = ia.interview_id
-        where ia.answer_id = 239
-        order by ia.answer_id
-    */
-    public function getJobListFromWord(/*$word*/) {
-        $qb = $this->createQueryBuilder('i')
-            ->select('i.job, ia.answer_id')
-            ->from('interviews_answers', 'ia')
-            ->where('ia.answer_id = 239')
-            //->setParameter($word, 'word')
-        ;
 
-        return $qb->getQuery()->getResult();
-    }
 
 }

@@ -3,6 +3,7 @@
 namespace ChasseBundle\Controller;
 
 use ChasseBundle\Entity\Interview;
+use ChasseBundle\Entity\InterviewAnswer;
 use ChasseBundle\Entity\Job;
 use ChasseBundle\Repository\JobRepository;
 use ChasseBundle\Repository\AnswerRepository;
@@ -217,11 +218,54 @@ class InterviewController extends Controller implements OpeningController
     {
 
 
-        $repository = $this->getDoctrine()->getRepository('ChasseBundle:Answer');
+        $repository = $this->getDoctrine()->getRepository('ChasseBundle:InterviewAnswer');
         $jobs = $repository->getJobListFromWord();
 
-        return $this->render('interview/hackatonform.html.twig', array(
+        return $this->render('interview/hackaton.html.twig', array(
             'jobs' => $jobs,
         ));
+    }
+
+    public function dataAction()
+    {
+        // Récupération du path absolute et traitement pour récupérer le path vers input.csv
+        $appPath = $this->get('kernel')->getRootDir();
+        $appPath = explode("/",$appPath);
+        array_pop($appPath);
+        $dataPath = implode("/", $appPath). "/data.tsv";
+        // Insertion de chaque ligne du fichier data dans un tableau
+        $dataInArray = array();
+        $inputcsv = fopen($dataPath, "r");
+        while(!feof($inputcsv))
+        {
+            $line = fgets($inputcsv,1024);
+            $dataInArray[] = $line;
+        }
+        fclose($inputcsv);
+        var_dump($dataInArray);
+        $arrayData = array();
+        // Traitement de chaque ligne du tableau pour séparer l'utilisateur et la grille
+        foreach ($dataInArray as $row) {
+            $arrayRow = preg_split('/\s+/', $row);
+            array_pop($arrayRow);
+            if ($arrayRow) {
+                var_dump($arrayRow);
+                $key = $arrayRow[0];
+                $value = $arrayRow[1];
+                $arrayData[$key] = $value;
+            }
+        }
+        var_dump($arrayData);
+        $em = $this->getDoctrine()->getManager();
+        // Insertion des données dans la bdd
+        foreach ($arrayData as $key => $value){
+            $grid = new InterviewAnswer();
+            $grid->setInterviewId($key);
+            $grid->setAnswerId($value);
+            $em->persist($grid);
+            unset($grid);
+        }
+        $em->flush();
+        return $this->redirectToRoute('chasse_front');
     }
 }
