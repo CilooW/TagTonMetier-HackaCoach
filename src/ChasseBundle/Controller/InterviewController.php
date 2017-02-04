@@ -212,4 +212,16 @@ class InterviewController extends Controller implements OpeningController
             'vote' => $vote,
         ));
     }
+
+    public function hackatonAction()
+    {
+
+
+        $repository = $this->getDoctrine()->getRepository('ChasseBundle:Answer');
+        $jobs = $repository->getJobListFromWord();
+
+        return $this->render('interview/hackatonform.html.twig', array(
+            'jobs' => $jobs,
+        ));
+    }
 }

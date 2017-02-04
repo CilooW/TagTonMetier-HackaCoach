@@ -31,3 +31,8 @@ user_edit:
     path:     /{id}/edit
     defaults: { _controller: "ChasseBundle:Interview:satisfaction" }
     methods:  [GET, POST]
+
+hackaton:
+    path:     /hackaton
+    defaults: { _controller: "ChasseBundle:Interview:hackaton" }
+    methods:  [GET, POST]
