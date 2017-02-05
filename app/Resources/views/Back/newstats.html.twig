@@ -45,5 +45,59 @@
         </table>
     </div>
 
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les collégiens</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByCol %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les lycéens</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByLyc %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les étudiants</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByEtu %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
 
 {% endblock %}

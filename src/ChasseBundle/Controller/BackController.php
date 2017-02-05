@@ -56,15 +56,27 @@ class BackController extends Controller
     }
 
     public function newStatsAction() {
-        //  20 most answered jobs by gender
+        //  20 most answered jobs by gender F
         $jobsByF = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByF();
 
-        //  20 most answered jobs by gender
+        //  20 most answered jobs by gender H
         $jobsByH = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByH();
+
+        //  20 most answered jobs by Collégien
+        $jobsByCol = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByCol();
+
+        //  20 most answered jobs by Lycéen
+        $jobsByLyc = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByLyc();
+
+        //  20 most answered jobs by Etudiant
+        $jobsByEtu = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByEtu();
 
         return $this->render('Back/newstats.html.twig', array(
             "jobsByF"    =>      $jobsByF,
             "jobsByH"    =>      $jobsByH,
+            "jobsByCol"  =>      $jobsByCol,
+            "jobsByLyc"  =>      $jobsByLyc,
+            "jobsByEtu"  =>      $jobsByEtu,
         ));
     }
 
