@@ -64,10 +64,11 @@ class FrontController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $wordchosen = $form->getData()['word'];
+            $words = array();
             foreach ($wordchosen as $word) {
-                $words = $word->getWord();
+                $words[]= $word->getWord();
             }
-            //var_dump($wordchosen);
+            var_dump($words);
             $em = $this->getDoctrine()->getManager();
             $answers = $em->getRepository('ChasseBundle:Answer')->findBy(array('word' => $words)); //array avec toutes les réponses
             //var_dump($answers);
