@@ -2,8 +2,12 @@
 
 namespace ChasseBundle\Controller;
 
+use ChasseBundle\Entity\Answer;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
 class FrontController extends Controller
@@ -47,5 +51,42 @@ class FrontController extends Controller
         $response->setSharedMaxAge(2629000);
 
         return $response;
+    }
+
+    public function searchjobsAction(Request $request)
+    {
+        $answer = new Answer();
+        /* Generate form and set data for keyword */
+        $form = $this->createForm('ChasseBundle\Form\AnswerType', $answer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //récupérer le mot de l'utilisateur
+            $wordchos = $answer->getWord();
+            $wordchosen = $this->getDoctrine()
+                ->getRepository('ChasseBundle:Answer')->find($wordchos);
+            return $this->redirectToRoute('hackaton', array('word' => $wordchosen));
+        }
+
+        return $this->render('Front/searchjobs.html.twig', array(
+            'answer' => $answer,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Handling autocomplete request
+     * @param Request $request
+     * @param $word
+     * @return JsonResponse
+     */
+    public function wordsearchAction(Request $request, $word)
+    {
+        if ($request->isXmlHttpRequest()){
+            $data = $this->getDoctrine()->getRepository('ChasseBundle:Answer')->searchWords($word);
+            return new JsonResponse(array("data" => json_encode($data)));
+        } else {
+            throw new HttpException('500', 'Invalid call');
+        }
     }
 }

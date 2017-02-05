@@ -21,3 +21,12 @@ learnmore:
 finished:
     path:     /evenement-terminé
     defaults: { _controller: ChasseBundle:Front:finished }
+
+searchjobs:
+    path:     /searchjobs
+    defaults: { _controller: ChasseBundle:Front:searchjobs }
+
+word_search:
+    path:     /look/{word}
+    defaults: { _controller: "ChasseBundle:Front:wordsearch" }
+    methods:  POST
