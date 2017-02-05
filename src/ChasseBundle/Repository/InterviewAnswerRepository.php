@@ -23,7 +23,7 @@ class InterviewAnswerRepository extends \Doctrine\ORM\EntityRepository
     public function getJobListFromWord(/*$word*/) {
         $qb = $this->createQueryBuilder('ia')
             ->select('i.job_ib, ia.answerId')
-            ->leftJoin('ia.interviewId', 'i')
+            ->leftJoin('interview', 'i')
             ->where('ia.answerId = 239')
             //->setParameter($word, 'word')
         ;

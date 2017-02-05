@@ -2,6 +2,8 @@
 
 namespace ChasseBundle\Controller;
 
+use ChasseBundle\ChasseBundle;
+use ChasseBundle\Entity\Answer;
 use ChasseBundle\Entity\Interview;
 use ChasseBundle\Entity\InterviewAnswer;
 use ChasseBundle\Entity\Job;
@@ -216,14 +218,30 @@ class InterviewController extends Controller implements OpeningController
 
     public function hackatonAction()
     {
+        $em = $this->getDoctrine()->getManager();
 
+        $answers = $em->getRepository('ChasseBundle:Answer')->findBy(array('word'=> 'Créativité')); //array avec toutes les réponses
 
-        $repository = $this->getDoctrine()->getRepository('ChasseBundle:InterviewAnswer');
-        $jobs = $repository->getJobListFromWord();
+        $jobs = array();
+        /** @var Answer $answer */
+        foreach ($answers as $answer) {
+            $interviews = $answer->getInterviews();
+            /** @var Interview $interview */
+            foreach ($interviews as $interview) {
+                $jobname = $interview->getJob()->getName();
+                if(key_exists($jobname, $jobs)) {
+                    $jobs[$jobname] += 1;
+                }
+                else {
+                    $jobs[$jobname] = 1;
+                }
+            }
+        }
 
         return $this->render('interview/hackaton.html.twig', array(
             'jobs' => $jobs,
         ));
+
     }
 
     public function dataAction()
