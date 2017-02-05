@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sélection du mot clé - Trouve ton métier{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col offset-s1 s10 offset-m2 m8 offset-l3 l6">
+
+                <h1>Choix du métier</h1>
+<table>
+                {% for key in jobs|keys %}
+
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ jobs[key] }}</td>
+                    </tr>
+                {% endfor %}
+</table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
