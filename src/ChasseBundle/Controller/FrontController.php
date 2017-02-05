@@ -68,7 +68,6 @@ class FrontController extends Controller
             foreach ($wordchosen as $word) {
                 $words[]= $word->getWord();
             }
-            var_dump($words);
             $em = $this->getDoctrine()->getManager();
             $answers = $em->getRepository('ChasseBundle:Answer')->findBy(array('word' => $words)); //array avec toutes les réponses
             //var_dump($answers);
