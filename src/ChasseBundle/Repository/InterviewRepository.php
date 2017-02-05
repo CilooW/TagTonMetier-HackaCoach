@@ -53,11 +53,13 @@ class InterviewRepository extends EntityRepository
 
     }
 
-    public function get20jobsbyGender() { // function that returns the 20 most asnwered jobs
+    public function get20jobsByF() { // function that returns the 20 most asnwered jobs
         $qb = $this->createQueryBuilder('i')
             ->select('i.id as id', 'j.name as name', 'count(i.id) as total')
-            //->innerJoin( 'i', 'Job', 'j', 'j.id = i.job')
             ->innerJoin( 'i.job', 'j')
+            ->innerJoin('i.user', 'u')
+            ->where('u.gender = :data')
+            ->setParameter('data', 'F')
             ->groupBy('i.job')
             ->orderBy('total', 'DESC')
             ->setMaxResults(20)
