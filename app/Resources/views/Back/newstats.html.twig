@@ -1,0 +1,210 @@
+{% extends "::base.html.twig" %}
+
+
+{% block body %}
+    <div class="container">
+    <h1>Statistiques d'utilisation de l'application</h1>
+
+    <div class="center">
+        <a href="{{ path("admin") }}" class="btn">Retour à la page d'administration</a>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les Femmes</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByF %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les Hommes</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByH %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les collégiens</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByCol %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les lycéens</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByLyc %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les étudiants</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByEtu %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    {#<div>
+        <h2>Classement des 20 métiers les plus répondus par les parents</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByPar %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>#}
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les demandeurs d'emploi</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByDem %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les adultes en réorientation</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByAdu %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    {#<div>
+        <h2>Classement des 20 métiers les plus répondus par les professionnels de l'orientation et de la formation</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByPro %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>#}
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les salariés</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsBySal %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par la catégorie Autre</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByAut %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}

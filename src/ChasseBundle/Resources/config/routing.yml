@@ -10,3 +10,7 @@ chasse_front:
 chasse_back:
     resource: "@ChasseBundle/Resources/config/routing/back.yml"
     prefix:   /back
+
+add_data:
+    path:     /add_data
+    defaults: {_controller: ChasseBundle:Interview:data}

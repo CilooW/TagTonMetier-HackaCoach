@@ -1,0 +1,18 @@
+ChasseBundle\Entity\InterviewAnswer:
+    type: entity
+    table: null
+    repositoryClass: ChasseBundle\Repository\InterviewAnswerRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        interviewId:
+            type: integer
+            column: interview_id
+        answerId:
+            type: integer
+            column: answer_id
+    lifecycleCallbacks: {  }

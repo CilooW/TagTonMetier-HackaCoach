@@ -1,0 +1,63 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Mentions Légales - Tag ton métier{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col offset-s1 s10 offset-m2 m8 offset-l3 l6">
+                <h1>Cherche un métier à partir de mots clés</h1>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col s12 offset-m2 m8 offset-l3 l6" id="chipchosen"></div>
+
+            <div class="col offset-s1 s10 offset-m2 m8 offset-l3 l6">
+                <label for="inputword" >Choisis tes mots-clés:</label>
+                <input type="text" name="" id="inputword" maxlength="255">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 offset-m2 m8 offset-l3 l6" id="wordautocomp"></div>
+        </div>
+
+        <div class="row">
+            <div class="col offset-s1 s10 offset-m2 m8 offset-l3 l6" id="nbresponse"></div>
+        </div>
+
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col offset-s1 s10 offset-m2 m8 offset-l3 l6">
+                {{ form_errors(form.word) }}
+            </div>
+        </div>
+        <div class="bloc_sp_xs"></div>
+        <div id="checkboxfield">
+            {{ form_row(form.word, {label:none, 'attr': {'class': 'hidden-row'}})}}
+            {{ form_widget(form) }}
+        </div>
+        <div class="row">
+            <div class="col offset-s1 s10 offset-m2 m8 offset-l3 l6">
+                <input class="btn jevote" type="submit" value="Cherche un métier">
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+    <div class="bloc_sp_s"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!-- Main script -->
+    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jobsearch.js') }}"></script>
+
+    <!-- Materialize -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+{% endblock %}
