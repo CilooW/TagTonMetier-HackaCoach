@@ -71,12 +71,36 @@ class BackController extends Controller
         //  20 most answered jobs by Etudiant
         $jobsByEtu = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByEtu();
 
+        //  20 most answered jobs by Parent
+        $jobsByPar = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByPar();
+
+        //  20 most answered jobs by Demandeur d'emploi
+        $jobsByDem = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByDem();
+
+        //  20 most answered jobs by Adulte en réorientation
+        $jobsByAdu = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByAdu();
+
+        //  20 most answered jobs by Professionnel de l'orientation et de la formation
+        $jobsByPro = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByPro();
+
+        //  20 most answered jobs by Salarié
+        $jobsBySal = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsBySal();
+
+        //  20 most answered jobs by Autre
+        $jobsByAut = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByAut();
+
         return $this->render('Back/newstats.html.twig', array(
             "jobsByF"    =>      $jobsByF,
             "jobsByH"    =>      $jobsByH,
             "jobsByCol"  =>      $jobsByCol,
             "jobsByLyc"  =>      $jobsByLyc,
             "jobsByEtu"  =>      $jobsByEtu,
+            "jobsByPar"  =>      $jobsByPar,
+            "jobsByDem"  =>      $jobsByDem,
+            "jobsByAdu"  =>      $jobsByAdu,
+            "jobsByPro"  =>      $jobsByPro,
+            "jobsBySal"  =>      $jobsBySal,
+            "jobsByAut"  =>      $jobsByAut,
         ));
     }
 

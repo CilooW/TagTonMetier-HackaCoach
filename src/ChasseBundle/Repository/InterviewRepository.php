@@ -133,6 +133,102 @@ class InterviewRepository extends EntityRepository
 
     }
 
+    public function get20jobsByPar() { // function that returns the 20 most answered jobs
+        $qb = $this->createQueryBuilder('i')
+            ->select('i.id as id', 'j.name as name', 'count(i.id) as total')
+            ->innerJoin( 'i.job', 'j')
+            ->innerJoin('i.user', 'u')
+            ->where('u.status = :data')
+            ->setParameter('data', 'Parent')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+
+    public function get20jobsByDem() { // function that returns the 20 most answered jobs
+        $qb = $this->createQueryBuilder('i')
+            ->select('i.id as id', 'j.name as name', 'count(i.id) as total')
+            ->innerJoin( 'i.job', 'j')
+            ->innerJoin('i.user', 'u')
+            ->where('u.status = :data')
+            ->setParameter('data', 'Demandeur d\'emploi')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+
+    public function get20jobsByAdu() { // function that returns the 20 most answered jobs
+        $qb = $this->createQueryBuilder('i')
+            ->select('i.id as id', 'j.name as name', 'count(i.id) as total')
+            ->innerJoin( 'i.job', 'j')
+            ->innerJoin('i.user', 'u')
+            ->where('u.status = :data')
+            ->setParameter('data', 'Adulte en réorientation')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+
+    public function get20jobsByPro() { // function that returns the 20 most answered jobs
+        $qb = $this->createQueryBuilder('i')
+            ->select('i.id as id', 'j.name as name', 'count(i.id) as total')
+            ->innerJoin( 'i.job', 'j')
+            ->innerJoin('i.user', 'u')
+            ->where('u.status = :data')
+            ->setParameter('data', 'Professionnel de l\'orientation et de la formation')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+
+    public function get20jobsBySal() { // function that returns the 20 most answered jobs
+        $qb = $this->createQueryBuilder('i')
+            ->select('i.id as id', 'j.name as name', 'count(i.id) as total')
+            ->innerJoin( 'i.job', 'j')
+            ->innerJoin('i.user', 'u')
+            ->where('u.status = :data')
+            ->setParameter('data', 'Salarié')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+
+    public function get20jobsByAut() { // function that returns the 20 most answered jobs
+        $qb = $this->createQueryBuilder('i')
+            ->select('i.id as id', 'j.name as name', 'count(i.id) as total')
+            ->innerJoin( 'i.job', 'j')
+            ->innerJoin('i.user', 'u')
+            ->where('u.status = :data')
+            ->setParameter('data', 'Autre')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+
     public function get20domains() { //  function that returns the 20 most asnwered domains
         $qb = $this->createQueryBuilder('i')
             ->select('i', 'j.domain as domain', 'count(i.id) as total')

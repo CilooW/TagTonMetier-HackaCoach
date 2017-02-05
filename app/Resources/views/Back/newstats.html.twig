@@ -99,5 +99,112 @@
         </table>
     </div>
 
+    {#<div>
+        <h2>Classement des 20 métiers les plus répondus par les parents</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByPar %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>#}
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les demandeurs d'emploi</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByDem %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les adultes en réorientation</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByAdu %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    {#<div>
+        <h2>Classement des 20 métiers les plus répondus par les professionnels de l'orientation et de la formation</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByPro %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>#}
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par les salariés</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsBySal %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h2>Classement des 20 métiers les plus répondus par la catégorie Autre</h2>
+        <table class="table bordered striped table-bordered">
+            <thead>
+            <tr>
+                <th>Métier</th>
+                <th>Nombre de réponses</th>
+            </tr>
+            </thead>
+            {% for job in jobsByAut %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>{{ job.total }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
 {% endblock %}
