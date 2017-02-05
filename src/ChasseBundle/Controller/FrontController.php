@@ -3,6 +3,7 @@
 namespace ChasseBundle\Controller;
 
 use ChasseBundle\Entity\Answer;
+use ChasseBundle\Entity\Interview;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -55,24 +56,70 @@ class FrontController extends Controller
 
     public function searchjobsAction(Request $request)
     {
-        $answer = new Answer();
+
         /* Generate form and set data for keyword */
-        $form = $this->createForm('ChasseBundle\Form\AnswerType', $answer);
+        $form = $this->createForm('ChasseBundle\Form\AnswerType');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $wordchosen = $form->getData()['word'];
+            foreach ($wordchosen as $word) {
+                $words = $word->getWord();
+            }
+            //var_dump($wordchosen);
+            $em = $this->getDoctrine()->getManager();
+            $answers = $em->getRepository('ChasseBundle:Answer')->findBy(array('word' => $words)); //array avec toutes les réponses
+            //var_dump($answers);
+            $jobs = array();
+
+            /** @var Answer $answer */
+            foreach ($answers as $answer) {
+                $interviews = $answer->getInterviews();
+                /** @var Interview $interview */
+                foreach ($interviews as $interview) {
+                    $jobname = $interview->getJob()->getName();
+                    if (key_exists($jobname, $jobs)) {
+                        $jobs[$jobname] += 1;
+                    } else {
+                        $jobs[$jobname] = 1;
+                    }
+                }
+
+            }
+
+            return $this->render('interview/hackaton.html.twig', array(
+                'jobs' => $jobs,
+            ));
+        }
+        return $this->render('Front/searchjobs.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
+
+/*
             //récupérer le mot de l'utilisateur
             $wordchos = $answer->getWord();
             $wordchosen = $this->getDoctrine()
                 ->getRepository('ChasseBundle:Answer')->find($wordchos);
-            return $this->redirectToRoute('hackaton', array('word' => $wordchosen));
-        }
+            // return $this->redirectToRoute('hackaton', array('word' => $wordchosen));
 
-        return $this->render('Front/searchjobs.html.twig', array(
-            'answer' => $answer,
-            'form' => $form->createView(),
-        ));
+            $response = $this->redirectToRoute('hackaton', array(
+                'word'  => $wordchosen,
+            ));
+
+            return $response;
+        } else {
+            return $this->render('Front/searchjobs.html.twig', array(
+                'answer' => $answer,
+                'form' => $form->createView(),
+            ));
+        }
+*/
+
+
     }
+
 
     /**
      * Handling autocomplete request

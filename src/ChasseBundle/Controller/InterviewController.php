@@ -220,7 +220,7 @@ class InterviewController extends Controller implements OpeningController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $answers = $em->getRepository('ChasseBundle:Answer')->findBy(array('word'=> 'Créativité')); //array avec toutes les réponses
+       $answers = $em->getRepository('ChasseBundle:Answer')->findBy(array('word'=> 'Créativité')); //array avec toutes les réponses
 
         $jobs = array();
         /** @var Answer $answer */
