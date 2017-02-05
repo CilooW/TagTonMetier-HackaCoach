@@ -59,8 +59,12 @@ class BackController extends Controller
         //  20 most answered jobs by gender
         $jobsByF = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByF();
 
+        //  20 most answered jobs by gender
+        $jobsByH = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByH();
+
         return $this->render('Back/newstats.html.twig', array(
             "jobsByF"    =>      $jobsByF,
+            "jobsByH"    =>      $jobsByH,
         ));
     }
 
