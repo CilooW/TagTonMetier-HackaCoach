@@ -55,6 +55,15 @@ class BackController extends Controller
         ));
     }
 
+    public function newStatsAction() {
+        //  20 most answered jobs by gender
+        $jobsByF = $this->getDoctrine()->getRepository('ChasseBundle:Interview')->get20jobsByF();
+
+        return $this->render('Back/newstats.html.twig', array(
+            "jobsByF"    =>      $jobsByF,
+        ));
+    }
+
     public function userStatsAction ($page = 1) {
         //paginator
         $start = ($page-1) * UserRepository::MAX_RESULT;

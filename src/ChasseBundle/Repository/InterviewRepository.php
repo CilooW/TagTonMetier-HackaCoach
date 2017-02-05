@@ -53,6 +53,22 @@ class InterviewRepository extends EntityRepository
 
     }
 
+    public function get20jobsByF() { // function that returns the 20 most asnwered jobs
+        $qb = $this->createQueryBuilder('i')
+            ->select('i.id as id', 'j.name as name', 'count(i.id) as total')
+            ->innerJoin( 'i.job', 'j')
+            ->innerJoin('i.user', 'u')
+            ->where('u.gender = :data')
+            ->setParameter('data', 'F')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+
     public function get20domains() { //  function that returns the 20 most asnwered domains
         $qb = $this->createQueryBuilder('i')
             ->select('i', 'j.domain as domain', 'count(i.id) as total')

@@ -13,3 +13,7 @@ winner:
 export:
     path:     /newslettersub
     defaults: {_controller: ChasseBundle:Back:generateCsv}
+
+newstats:
+    path:     /newstats
+    defaults: {_controller: ChasseBundle:Back:newStats}
